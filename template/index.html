@@ -1,0 +1,26 @@
+{% extends 'headerPage.html' %}
+
+{% block content%}
+
+    <h2>Upload the 4 MRI files</h2>    
+    <br>
+
+    <form method="post" enctype="multipart/form-data" action="predict">
+  
+ {% csrf_token %}
+ <div class="col-md-4 col-sm-4"><label for="fname">Upload t1 File Here:</label> </div> <input name="filelocation2" type="file"><br><br>
+ <div class="col-md-4 col-sm-4"><label for="fname">Upload t2 File Here:</label> </div> <input name="filelocation3" type="file"><br><br>
+ <div class="col-md-4 col-sm-4"><label for="fname">Upload t1ce File Here:</label> </div> <input name="filelocation4" type="file"><br><br>
+  <div class="col-md-4 col-sm-4"><label for="fname">Upload flaire File Here:</label> </div> <input name="filelocation1" type="file"><br><br>
+
+ 
+ <input type="submit" value="Submit" >
+
+ <h2>The GIF generated is </h2>
+ <img src="media//out.gif" alt='imagename'>
+ 
+</form>
+<br>
+
+
+{% endblock %}

@@ -1,0 +1,7 @@
+*/.ipynb_checkpoints/*
+*.gif
+*/__pycache__/*
+media/
+*.h5
+*.gz
+*.nii
