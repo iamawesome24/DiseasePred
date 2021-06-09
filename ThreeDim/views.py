@@ -4,8 +4,7 @@ from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
 import os
 
-#from google.colab.output import eval_js
-#print(eval_js("google.colab.kernel.proxyPort(8000)"))
+from django.templatetags.static import static
 
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
@@ -23,7 +22,7 @@ def index(request):
 ###############################################################################
 
 import sys
-sys.path.insert(1, 'dl\model')
+sys.path.insert(1, 'dl/model')
 
 from backend_brain_pipeline import process_pipeline
 
@@ -63,6 +62,6 @@ def predict(request):
     #context={'filePathName':filePathName}
     
     print(paths) 
-    process_pipeline(paths, fname='gif//out.gif')
+    process_pipeline(paths, fname='ThreeDim/static/ThreeDim/out.gif')
 
     return render(request, 'index.html', context)
