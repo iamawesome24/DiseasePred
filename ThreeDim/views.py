@@ -39,6 +39,13 @@ def predict(request):
     paths = []
     
     fs = OverwriteStorage()
+
+    # for x in request.FILES.getlist('filelocation1'):
+    #     def process(f):
+    #         with open("media/file_"+str(x)+'wb+') as destination:
+    #             for chunk in f.chunks():
+    #                 destination.write(chunk)
+    #     process(x)
     fileObj = request.FILES['filelocation1']
     filePathName1 = fs.save(fileObj.name, fileObj)
     filePathName1 = fs.url(fileObj.name)
