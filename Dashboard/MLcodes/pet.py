@@ -10,7 +10,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
 
-print(1)
+model = tf.keras.models.load_model('C:\Users\heman\Download//PET_alzh.h5')
 
 def readImage(location,y_temp):
     image = nib.load(location)
@@ -34,19 +34,18 @@ def getSegments_test(subject,y_temp):
 
 
 
-def output():
+def output(file):
     
-    model = tf.keras.models.load_model('C://Users//heman//Downloads//PET_alzh.h5')
-    image,_ = readImage("C://Users//heman//Downloads//ADNI_011_S_0010_PET_30_min_3D_FDG_4i_16s__br_raw_20051114113046731_1_S10060_I8664.nii",[])
+   
+
+    image,_ = readImage(file,[])
     segments,_ = getSegments_test(image,[])
-    print(model.summary())
-    
-    segments = segments.reshape((1, 128,128,63,3))
+
+    print(len(segments))
+    segments = segments.reshape((1,128,128,63,3))
+    print('SHAPEEEEE')
     print(segments.shape)
-    a = model.predict(segments)
-    a = np.round(a)
+    
+    a = np.round(model.predict(segments))
     print(a)
     return a[0][0]
-
-output()
-

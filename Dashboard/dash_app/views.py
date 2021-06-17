@@ -14,7 +14,7 @@ from .operations.details import Details
 
 
 from backend_brain_pipeline import process_pipeline
-
+from pet import output
 
 class OverwriteStorage(FileSystemStorage):
 
@@ -39,36 +39,6 @@ def results(request):
     details['patient'] = patients[0] 
     ''''''
 
-    paths = ''
-    
-    fs = OverwriteStorage()
-    
-    fileObj = request.FILES['filelocation1']
-    filePathName1 = fs.save(fileObj.name, fileObj)
-    filePathName1 = fs.url(fileObj.name)
-    paths = filePathName1
-    paths.append("."+filePathName1)
-    
-    fileObj = request.FILES['filelocation2']
-    filePathName2 = fs.save(fileObj.name, fileObj)
-    filePathName2 = fs.url(fileObj.name)
-    paths.append("."+filePathName2)
-
-    fileObj = request.FILES['filelocation3']
-    filePathName3 = fs.save(fileObj.name, fileObj)
-    filePathName3 = fs.url(fileObj.name)
-    paths.append("."+filePathName3)
-
-    fileObj = request.FILES['filelocation4']
-    filePathName4 = fs.save(fileObj.name, fileObj)
-    filePathName4 = fs.url(fileObj.name)
-    paths.append("."+filePathName4)
-
-    context={'filePathName':filePathName}
-    
-    print(paths) 
-    process_pipeline(paths, fname='dash_app/static/dash_app/mri.gif')
-    print("A.....")
     return render(request, "results.html", details)
 
 
@@ -141,10 +111,49 @@ def addpatient(request):
     return render(request, "addPatient.html")
 
 
-def mri(request):
+# def mri(request):
+#     paths = ''
+    
+#     fs = OverwriteStorage()
+    
+#     fileObj = request.FILES['filelocation1']
+#     filePathName1 = fs.save(fileObj.name, fileObj)
+#     filePathName1 = fs.url(fileObj.name)
+#     paths = filePathName1
+#     paths.append("."+filePathName1)
+    
+#     fileObj = request.FILES['filelocation2']
+#     filePathName2 = fs.save(fileObj.name, fileObj)
+#     filePathName2 = fs.url(fileObj.name)
+#     paths.append("."+filePathName2)
 
-    if request.method == "POST":
-        print("uploading")
-        mrifiles = request.FILES.getlist("mri")
-        print(mrifiles)
-        return HttpResponse("ok")
+#     fileObj = request.FILES['filelocation3']
+#     filePathName3 = fs.save(fileObj.name, fileObj)
+#     filePathName3 = fs.url(fileObj.name)
+#     paths.append("."+filePathName3)
+
+#     fileObj = request.FILES['filelocation4']
+#     filePathName4 = fs.save(fileObj.name, fileObj)
+#     filePathName4 = fs.url(fileObj.name)
+#     paths.append("."+filePathName4)
+
+#     context={'filePathName':filePathName}
+    
+#     print(paths) 
+#     process_pipeline(paths, fname='dash_app/static/dash_app/mri.gif')
+#     print("A.....")
+
+#     return render(request, 'ind.html')
+
+def petscan(request):
+    
+    fs = OverwriteStorage()
+    
+    fileObj = request.FILES['filelocation1']
+    filePathName1 = fs.save(fileObj.name, fileObj)
+    filePathName1 = fs.url(fileObj.name)
+    paths = filePathName1
+
+    output(paths)
+
+    return render(request, 'profile.html')
