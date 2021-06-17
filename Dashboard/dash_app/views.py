@@ -68,7 +68,7 @@ def results(request):
     
     print(paths) 
     process_pipeline(paths, fname='dash_app/static/dash_app/mri.gif')
-
+    print("A.....")
     return render(request, "results.html", details)
 
 
